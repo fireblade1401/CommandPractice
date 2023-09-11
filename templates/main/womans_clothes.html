@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="computers_section layout_padding">
+         <div class="container">
+            <h1 class="computers_taital">Женская одежда</h1>
+         </div>
+      </div>
+      <div class="computers_section_2">
+         <div class="container-fluid">
+            <div class="computer_main">
+               <div class="row">
+                   {% for i in product_womans %}
+                  <div class="col-md-4">
+                     <div class="computer_img"><img src="{{ i.product_image.url }}"></div>
+                     <h4 class="computer_text">{{ i.product_name }}</h4>
+                     <div class="computer_text_main">
+                        <p class="dell_text">{{ i.category }}</p>
+                        <h6 class="price_text"><a href="#">{{ i.product_price }}₸</a></h6>
+                     </div>
+                     <div class="cart_bt_1"><a href="{% url 'products' %}">Заказать</a></div>
+                  </div>
+                   {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+{% endblock %}

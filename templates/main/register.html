@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-container">
+    <h2>Регистрация</h2>
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Логин:</label>
+            <input type="text" name="{{ form.username.name }}" class="form-control" id="id_username" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password1" class="form-label">Пароль:</label>
+            <input type="password" name="{{ form.password1.name }}" class="form-control" id="id_password1" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password2" class="form-label">Подтверждение пароля:</label>
+            <input type="password" name="{{ form.password2.name }}" class="form-control" id="id_password2" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+
+        <div class="register">
+            <p>Есть профиль?</p>
+            <a href="{% url 'login' %}" class="btn btn-primary">Войти</a>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
