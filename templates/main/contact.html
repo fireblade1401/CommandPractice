@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <!-- contact section start -->
+      <div class="contact_section layout_padding">
+          <div class="container">
+              <h1 class="contact_taital">Связаться с нами</h1>
+              <div class="contact_section_2">
+                  <div class="mail_section_1">
+                      <form method="post" action="{% url 'contact' %}">
+                          {% csrf_token %}
+                          {{ form.name }}
+                          {{ form.email }}
+                          {{ form.phone }}
+                          {{ form.message }}
+                          {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                          {% endif %}
+                          <div class="send_bt"><input type="submit" value="Отправить"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+{% endblock %}

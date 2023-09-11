@@ -1,5 +1,112 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <h1>Hello world</h1>
+<div class="banner_section layout_padding" style="height: 1500px">
+         <div id="my_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               {% for slide in slides %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="container">
+            <div class="row border_1">
+                <div class="col-md-4">
+                    <div class="image_1"><img src="{% static 'images/img-1.png' %}" style="width:100%"></div>
+                </div>
+                <div class="col-md-4">
+                    <h1 class="banner_taital">{{ slide.text }}</h1>
+                    <div class="buynow_bt active"><a href="{% url 'products' %}">Купить сейчас!</a></div>
+                    <div class="contact_bt"><a href="{% url 'contact' %}">Связаться с нами!</a></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="image_2"><img src="{% static 'images/img-2.png' %}" style="width:100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+               <br>
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+              <i class="fa fa-angle-right"></i>
+            </a>
+         </div>
+      </div>
+      <div class="computers_section layout_padding">
+         <div class="container">
+            <h1 class="computers_taital">Компьютерная техника</h1>
+         </div>
+      </div>
+      <div class="computers_section_2">
+         <div class="container-fluid">
+            <div class="computer_main">
+               <div class="row">
+                   {% for i in product_tech %}
+                  <div class="col-md-4">
+                     <div class="computer_img"><img src="{{ i.product_image.url }}"></div>
+                     <h4 class="computer_text">{{ i.product_name }}</h4>
+                     <div class="computer_text_main">
+                        <p class="dell_text">{{ i.category }}</p>
+                        <h6 class="price_text"><a href="#">{{ i.product_price }}₸</a></h6>
+                     </div>
+                     <div class="cart_bt_1"><a href="{% url 'products' %}">Заказать</a></div>
+                  </div>
+                   {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- computers section end -->
+      <!-- mans clothes section start -->
+<div class="computers_section layout_padding">
+         <div class="container">
+            <h1 class="computers_taital">Мужская одежда</h1>
+         </div>
+      </div>
+      <div class="computers_section_2">
+         <div class="container-fluid">
+            <div class="computer_main">
+               <div class="row">
+                   {% for i in product_mans %}
+                  <div class="col-md-4">
+                     <div class="computer_img"><img src="{{ i.product_image.url }}"></div>
+                     <h4 class="computer_text">{{ i.product_name }}</h4>
+                     <div class="computer_text_main">
+                        <p class="dell_text">{{ i.category }}</p>
+                        <h6 class="price_text"><a href="#">{{ i.product_price }}₸</a></h6>
+                     </div>
+                     <div class="cart_bt_1"><a href="{% url 'products' %}">Заказать</a></div>
+                  </div>
+                   {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- mans clothes section end -->
+      <!-- womans clothes section start -->
+      <div class="computers_section layout_padding">
+         <div class="container">
+            <h1 class="computers_taital">Женская одежда</h1>
+         </div>
+      </div>
+      <div class="computers_section_2">
+         <div class="container-fluid">
+            <div class="computer_main">
+               <div class="row">
+                   {% for i in product_womans %}
+                  <div class="col-md-4">
+                     <div class="computer_img"><img src="{{ i.product_image.url }}"></div>
+                     <h4 class="computer_text">{{ i.product_name }}</h4>
+                     <div class="computer_text_main">
+                        <p class="dell_text">{{ i.category }}</p>
+                        <h6 class="price_text"><a href="#">{{ i.product_price }}₸</a></h6>
+                     </div>
+                     <div class="cart_bt_1"><a href="{% url 'products' %}">Заказать</a></div>
+                  </div>
+                   {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
 {% endblock %}
+
