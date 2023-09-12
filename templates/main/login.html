@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="auth-container">
     <h2>Авторизация</h2>
-    <form action="{% url 'login' %}" method="POST">
+    <form action="{% url 'login' %}" method="POST" class="auth-form">
         {% csrf_token %}
         <div class="mb-3">
             <label for="id_username" class="form-label">Никнейм:</label>
@@ -28,7 +34,7 @@
 
         <div class="register">
             <p>Нет профиля? Зарегистрируйся</p>
-            <a href="{% url 'register' %}" class="btn btn-primary">Зарегистрироваться</a>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Зарегистрироваться</a>
         </div>
     </form>
 </div>

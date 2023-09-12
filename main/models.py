@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class MainSlider(models.Model):
@@ -66,9 +67,6 @@ class CartItem(models.Model):
         return f"{self.cart.user}, {self.product}, {self.quantity}"
 
 
-
-
-
 class links(models.Model):
     facebook = models.TextField()
     twitter = models.TextField()
@@ -96,5 +94,6 @@ class Callback(models.Model):
     class Meta:
         verbose_name = 'Обращение'
         verbose_name_plural = 'Обращения'
+
 
 
