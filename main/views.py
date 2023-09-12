@@ -99,7 +99,6 @@ def profile(request):
         return render(request, 'main/profile.html', {})
 
 
-
 def login_view(request):
     # Обработка данных формы входа
     if request.method == "POST":
@@ -169,14 +168,14 @@ def products(request):
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     try:
-        cart = Cart.objects.get(user=request.user, completed=False)  # Только get, не get_or_create
+        cart = Cart.objects.get(user=request.user, completed=False)
     except Cart.DoesNotExist:
         cart = Cart.objects.create(user=request.user)
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
     if not created:
         cart_item.quantity += 1
         cart_item.save()
-    return redirect('profile')
+    return redirect('products')
 
 
 def decrease_item(request, product_id):
@@ -200,12 +199,16 @@ def place_order(request):
         active_cart.completed = True  # Отметить корзину как завершенную (заказ)
         active_cart.save()
 
-        # Создать новую корзину для пользователя
         Cart.objects.create(user=request.user)
-        return redirect('products')
+
+        user_carts = Cart.objects.filter(user=request.user, completed=True)
+        context = {'user_carts': user_carts}
+
+        messages.success(request, 'Ваш заказ был отправлен!')
+        return render(request, 'main/profile.html', context)
     except Cart.DoesNotExist:
         messages.error(request, "Корзина не найдена!")
-        return redirect('products')
+        return redirect('profile')
     except Exception as e:
         messages.error(request, f"Произошла ошибка: {str(e)}")
-        return redirect('products')
+        return redirect('profile')

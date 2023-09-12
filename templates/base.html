@@ -116,6 +116,9 @@
                   <a href="{% url 'womans_clothes' %}">Женская одежда</a>
                   <a href="{% url 'contact' %}">Связаться с нами</a>
                   <a href="{% url 'products' %}">Каталог</a>
+                   {% if user.is_authenticated %}
+                  <a href="{% url 'profile' %}">Привет, {{ user.username }}!</a>
+                   {% endif %}
                </div>
                <span style="font-size:30px;cursor:pointer; color: #fff;" onclick="openNav()"><img src="{% static 'images/toggle-icon.png' %}"></span>
                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}"></a></a>
@@ -125,15 +128,15 @@
                             <li>
                                 {% if user.is_authenticated %}
                                     Привет, {{ user.username }}
-                                    <a href="{% url 'logout' %}" class="btn">Выйти</a>
+                                    <a href="{% url 'logout' %}" class="btn" style="margin-top: 5px;">Выйти</a>
                                 {% else %}
                                     <img src="{% static 'images/user-icon.png' %}" alt="User Icon">
-                                    <a href="{% url 'login' %}" class="btn">Войти/Зарегистрироваться</a>
+                                    <a href="{% url 'login' %}" class="btn" style="margin-top: 5px;">Войти/Зарегистрироваться</a>
                                 {% endif %}
                             </li>
                             <li>
                                 <img src="{% static 'images/trolly-icon.png' %}" alt="Trolly Icon">
-                                <a href="{% url 'profile' %}" class="btn">Моя Корзина</a>
+                                <a href="{% url 'profile' %}" class="btn" style="margin-top: 5px;">Моя Корзина</a>
                             </li>
                         </ul>
                     </div>

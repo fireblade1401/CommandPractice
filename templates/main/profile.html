@@ -20,18 +20,26 @@
                 <tbody>
                 {% for item in items %}
                     <tr>
-                        <td>{{ item.product.product_name }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.product.product_price }}₸</td>
-                        <td>{{ item.total_price }}₸</td>
+                        <td><h4>{{ item.product.product_name }}</h4></td>
+                        <td><h5>{{ item.quantity }}</h5></td>
+                        <td><h5>{{ item.product.product_price }}₸</h5></td>
+                        <td><h5>{{ item.total_price }}₸</h5></td>
                         <td>
-                            <a href="{% url 'decrease_item' item.product.id %}" class="btn btn-danger btn-sm">-</a>
+                            <a href="{% url 'decrease_item' item.product.id %}"
+                               class="btn btn-danger btn-sm"
+                               style="width: 40px;">-</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <h4>Итого: {{ total_quantity }} товаров</h4>
                 <h4>Общая сумма: {{ total_price }}₸</h4>
@@ -41,7 +49,37 @@
             </div>
         </form>
     </div>
+<div class="mt-5">
+        <h2>История заказов пользователя {{ user.username }}</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Количество</th>
+                        <th>Цена за единицу</th>
+                        <th>Общая цена</th>
+                        <th>Дата заказа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for cart in user_carts %}
+                    {% for item in cart.cartitem_set.all %}
+                    <tr>
+                        <td>{{ item.product.product_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.product_price }}₸</td>
+                        <td>{{ item.total_price }}₸</td>
+                        <td>{{ cart.created_at|date:"d M Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
 
 
 {% endblock %}
